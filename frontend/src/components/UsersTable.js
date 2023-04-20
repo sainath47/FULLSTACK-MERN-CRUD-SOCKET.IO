@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Button, Icon, Table } from "semantic-ui-react";
 import UserModal from "./UserModal";
-import { io } from "socket.io-client";
-
+import  io  from "socket.io-client";
+    const socket = io.connect("http://localhost:8080");
 
 
 
 const TableExampleApprove = () => {
   const [users, setUsers] = useState([]);
   const [open, setOpen] = useState(false)
-
+  const handleGod = ()=>{
+    socket.emit("god")
+      }
   
   useEffect(() => {
     console.log("god in useEffect");
-    // const socket = io("http://localhost:8080");
+
 
 
    async function fetchUsers(){
@@ -55,6 +57,7 @@ setUsers(users.data)
 
   return(
   <Table compact celled definition>
+          <button onClick={handleGod}>god</button>
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell />
