@@ -74,16 +74,16 @@ setOpen(!open);
   // Make sure to replace the URL with the actual URL of your backend API
 
 const deleteUser = async (userId) => {
-  // try {
-    console.log(id,"id");
+  try {
+ 
     const response = await fetch(`http://localhost:8080/users/${userId}`, {
       method: "DELETE",
     });
     const data = await response.json();
-    console.log(data);
-  // } catch (error) {
-  //   console.error(error);
-  // }
+
+  } catch (error) {
+    console.error(error);
+  }
 };
 deleteUser(id)
 

@@ -19,3 +19,11 @@ router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
 
 module.exports = router;
+/*     const { id } = req.params;
+TypeError: Cannot destructure property 'id' of 'req.params' as it is undefined.
+
+    at BroadcastOperator.updateUser (C:\Users\P.V.SAINATH REDDY\Desktop\pro\backend\controller\user.controller.js:51:13)
+    at Timeout._onTimeout (C:\Users\P.V.SAINATH REDDY\Desktop\pro\backend\node_modules\socket.io\dist\broadcast-operator.js:181:17)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+    **/

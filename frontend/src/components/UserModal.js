@@ -10,27 +10,17 @@ function UserModal(props) {
     age: "",
   });
 
-
-useEffect(()=>{
-
-if(props.user) {
-  const {name, email, age} = props.user
-  setFormData({name, email, age})}
-else setFormData({
-  name: "",
-  email: "",
-  age: "",
-})
-},[open,props.user])
-
-// useEffect(()=>{
-//   console.log("god set formdata");
-// setFormData({
-//   name: "sainath",
-//   email: "god",
-//   age: "unknoewn",
-// })
-// },[open])
+  useEffect(() => {
+    if (props.user) {
+      const { name, email, age } = props.user;
+      setFormData({ name, email, age });
+    } else
+      setFormData({
+        name: "",
+        email: "",
+        age: "",
+      });
+  }, [open, props.user]);
 
 
   const handleChange = (event) => {
@@ -52,30 +42,29 @@ else setFormData({
           body: JSON.stringify(formData),
         });
         const data = await response.json();
-
       }
       createUser(formData);
     } else if (props.method === "PUT") {
-  
-
-const updateUser = async (user, updatedUserData) => {
-  //now the question is how do i set the formdata as soon as user click on the edit button
-  try {
-    const response = await fetch(`http://localhost:8080/users/${user._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedUserData),
-    });
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-};
-updateUser(props.user)
-
+      const updateUser = async (user, updatedUserData) => {
+        //now the question is how do i set the formdata as soon as user click on the edit button
+        try {
+          const response = await fetch(
+            `http://localhost:8080/users/${user._id}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(updatedUserData),
+            }
+          );
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      updateUser(props.user,formData);
     }
 
     setOpen(!open);
@@ -83,7 +72,7 @@ updateUser(props.user)
       name: "",
       email: "",
       age: "",
-    })
+    });
   };
 
   return (
@@ -131,11 +120,17 @@ updateUser(props.user)
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button color="red" onClick={() =>{ setOpen(false);    setFormData({
-      name: "",
-      email: "",
-      age: "",
-    })}}>
+        <Button
+          color="red"
+          onClick={() => {
+            setOpen(false);
+            setFormData({
+              name: "",
+              email: "",
+              age: "",
+            });
+          }}
+        >
           Cancel
         </Button>
       </Modal.Actions>
