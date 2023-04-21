@@ -4,21 +4,18 @@
 // const app = express();
 // const server = http.createServer(app);
 // const io = socketIO(server);
+const express = require('express');
+const http = require('http');
+const app = express();
+const server = http.createServer(app);
+const {Server} = require('socket.io')
+const io = new Server(server ,{
+  cors:{
+    origin: 'http://localhost:3000',
+    methods:['GET', "POST","PUT", "DELETE"],
+  },
+});
+
+module.exports = {io,app,server,express}
 
 
-
-// module.exports = {io}
-
-
-
-// //documentation code
-// const express = require("express");
-// const { createServer } = require("http");
-// const { Server } = require("socket.io");
-// const app = express();
-// const httpServer = createServer(app);
-// const io = new Server(httpServer, { /* options */ });
-// io.on("connection", (socket) => {
-//   // ...
-// });
-// httpServer.listen(3000);

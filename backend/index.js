@@ -1,25 +1,26 @@
-const express = require('express');
+
 const mongoose = require('mongoose');
 const cors = require('cors');
-const http = require('http');
 
-const app = express();
-const server = http.createServer(app);
-const {Server} = require('socket.io')
-const io = new Server(server ,{
-  cors:{
-    origin: 'http://localhost:3000',
-    methods:['GET', "POST","PUT", "DELETE"],
-  },
-});
+const { io, app, server,express } = require('./utils/socket');
+// const app = express();
+// const server = http.createServer(app);
+
 
 
 const userRoutes = require('./routes/users.route');
 
 
+
 // Parse JSON request bodies
 app.use(express.json());
 app.use(cors())
+
+//logging the request path & method
+// app.use((req,res,next)=>{
+//   console.log(req.path , req.method);
+//   next()
+// })
 
 
 
@@ -39,13 +40,12 @@ app.use('/users', userRoutes);
 
 
 io.on('connection', (socket) => {
-  console.log('New client connected');
-socket.on("god", ()=>{
-  console.log("god speaking");
-})
-  socket.on('disconnect', () => {
-    console.log('Client disconnected');
-  });
+  // console.log('New client connected');
+
+// socket.emit("emit from backend",{msg: "msg to frontend"})
+  // socket.on('disconnect', () => {
+  //   console.log('Client disconnected');
+  // });
 });
 // Start the server
 const port = 8080;
