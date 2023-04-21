@@ -34,7 +34,7 @@ function UserModal(props) {
 
     if (props.method === "POST") {
       async function createUser(formData) {
-        const response = await fetch("http://localhost:8080/users/", {
+        const response = await fetch("/users/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -49,7 +49,7 @@ function UserModal(props) {
         //now the question is how do i set the formdata as soon as user click on the edit button
         try {
           const response = await fetch(
-            `http://localhost:8080/users/${user._id}`,
+            `/users/${user._id}`,
             {
               method: "PUT",
               headers: {

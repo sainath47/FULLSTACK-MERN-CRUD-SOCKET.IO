@@ -40,18 +40,26 @@ app.use('/users', userRoutes);
 
 
 io.on('connection', (socket) => {
-  // console.log('New client connected');
+  console.log('New client connected');
 
-// socket.emit("emit from backend",{msg: "msg to frontend"})
-  // socket.on('disconnect', () => {
-  //   console.log('Client disconnected');
-  // });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
 });
-// Start the server
-const port = 8080;
-server.listen(port, () => console.log(`Server listening on port ${port}`));
+// // Start the server
+// const port = 8080;
+// server.listen(port, () => console.log(`Server listening on port ${port}`));
 
-
+app.use(express.static(path.join(__dirname, "./frontend/build")));
+app.get("*", function (req, res) {
+  res.sendFile(
+    path.join(__dirname, "./frontend/build/index.html"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
 
 //all the answers you gave were mugged up 
 //& didm't give the answers properly

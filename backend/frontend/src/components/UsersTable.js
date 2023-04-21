@@ -41,7 +41,7 @@ const TableExampleApprove = () => {
     });
 
     async function fetchUsers() {
-      let response = await fetch("http://localhost:8080/users/", {
+      let response = await fetch("/users/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ setOpen(!open);
 const deleteUser = async (userId) => {
   try {
  
-    const response = await fetch(`http://localhost:8080/users/${userId}`, {
+    const response = await fetch(`/users/${userId}`, {
       method: "DELETE",
     });
    await response.json();
