@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Icon, Table } from "semantic-ui-react";
 import UserModal from "./UserModal";
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:8080");
+const socket = io.connect();
 
 const TableExampleApprove = () => {
   const [users, setUsers] = useState([]);
