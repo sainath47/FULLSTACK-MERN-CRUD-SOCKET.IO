@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Icon, Table } from "semantic-ui-react";
 import UserModal from "./UserModal";
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:8080");
+const socket = io.connect("https://sainath-socket.onrender.com");
 
 const TableExampleApprove = () => {
   const [users, setUsers] = useState([]);
@@ -41,7 +41,7 @@ const TableExampleApprove = () => {
     });
 
     async function fetchUsers() {
-      let response = await fetch("http://localhost:8080/users/", {
+      let response = await fetch("https://sainath-socket.onrender.com/users/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ setOpen(!open);
 const deleteUser = async (userId) => {
   try {
  
-    const response = await fetch(`http://localhost:8080/users/${userId}`, {
+    const response = await fetch(`https://sainath-socket.onrender.com/users/${userId}`, {
       method: "DELETE",
     });
     const data = await response.json();
