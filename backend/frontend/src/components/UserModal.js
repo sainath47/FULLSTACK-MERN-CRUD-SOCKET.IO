@@ -41,7 +41,7 @@ function UserModal(props) {
           },
           body: JSON.stringify(formData),
         });
-        const data = await response.json();
+      await response.json();
       }
       createUser(formData);
     } else if (props.method === "PUT") {
@@ -58,8 +58,8 @@ function UserModal(props) {
               body: JSON.stringify(updatedUserData),
             }
           );
-          const data = await response.json();
-          console.log(data);
+        await response.json();
+          
         } catch (error) {
           console.error(error);
         }

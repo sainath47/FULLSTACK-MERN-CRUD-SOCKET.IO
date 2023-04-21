@@ -79,7 +79,7 @@ const deleteUser = async (userId) => {
     const response = await fetch(`http://localhost:8080/users/${userId}`, {
       method: "DELETE",
     });
-    const data = await response.json();
+   await response.json();
 
   } catch (error) {
     console.error(error);
