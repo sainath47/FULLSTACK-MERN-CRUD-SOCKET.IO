@@ -23,6 +23,6 @@ the back-end. Semantic UI React to be used.
 
 ## Submission:
 Candidates should submit the assignment as follows:
-● GitHub link to the project
-● Hosted link on Heroku or any other hosting platform
-● Screen record of the workflow
+- GitHub link to the project
+- Hosted link on Heroku or any other hosting platform(https://sainath-socket.netlify.app/)
+- Screen record of the workflow
