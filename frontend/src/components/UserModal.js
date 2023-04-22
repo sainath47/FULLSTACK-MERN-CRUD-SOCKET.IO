@@ -3,6 +3,7 @@ import { Button, Modal, Form } from "semantic-ui-react";
 
 function UserModal(props) {
   const setOpen = props.setOpen;
+  const [images, setImages] = useState([]);
   const open = props.open;
   const [formData, setFormData] = useState({
     name: "",
@@ -22,6 +23,17 @@ function UserModal(props) {
       });
   }, [open, props.user]);
 
+  const handleImageDelete = (index) => {
+    const filteredImages = images.filter((_, i) => i !== index);
+    setImages(filteredImages);
+  };
+
+  const handleFileChange = (event) => {
+    const fileList = event.target.files;
+    console.log(fileList);
+    const imageArray = Array.from(fileList).map((file) => URL.createObjectURL(file));
+    setImages([...images, ...imageArray]);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,14 +46,14 @@ function UserModal(props) {
 
     if (props.method === "POST") {
       async function createUser(formData) {
-        const response = await fetch("https://sainath-socket.onrender.com/users/", {
+        const response = await fetch("http://localhost:8080/users/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
         });
-        const data = await response.json();
+        await response.json();
       }
       createUser(formData);
     } else if (props.method === "PUT") {
@@ -49,7 +61,7 @@ function UserModal(props) {
         //now the question is how do i set the formdata as soon as user click on the edit button
         try {
           const response = await fetch(
-            `https://sainath-socket.onrender.com/users/${user._id}`,
+            `http://localhost:8080/users/${user._id}`,
             {
               method: "PUT",
               headers: {
@@ -115,7 +127,24 @@ function UserModal(props) {
               onChange={handleChange}
             />
           </Form.Field>
-          <Form.Field></Form.Field>
+          <Form.Field>
+          <div>
+          <label htmlFor="imageUpload">Upload Images:</label>
+          <input type="file" id="imageUpload" multiple onChange={handleFileChange} />
+        </div>
+        <button type="submit">Submit</button>
+  
+      <div>
+        {images.map((image, index) => (
+          <div key={index}>
+            <img src={image} alt={`Uploaded  ${index}`} />
+            <button onClick={() => handleImageDelete(index)}>Delete</button>
+          </div>
+        ))}
+      </div>
+
+
+          </Form.Field>
           <Button type="submit">Submit</Button>
         </Form>
       </Modal.Content>
@@ -139,3 +168,8 @@ function UserModal(props) {
 }
 
 export default UserModal;
+
+
+/**
+ there is still confusion how i will be uploading & going to handle 
+ */

@@ -11,11 +11,11 @@ const server = http.createServer(app);
 const {Server} = require('socket.io')
 const io = new Server(server ,{
   cors:{
-    origin: 'https://sainath-socket.netlify.app',
+    origin: 'http://localhost:3000',
     methods:['GET', "POST","PUT", "DELETE"],
   },
 });
 
 module.exports = {io,app,server,express}
-
+/* so now what iam thinking of is, using cloudinary , i will uploading files which is given , if you wanna implement , you can go for pagination , & authentication & autorization of deleting the user **/
 
